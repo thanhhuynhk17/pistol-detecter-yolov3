@@ -1,0 +1,51 @@
+/* navbar dark theme */
+.navbar, .navbar .container .navbar-nav .dropdown .dropdown-menu{
+    background: #313b42;
+}
+
+
+.navbar .container .navbar-header .navbar-brand img{
+    width: 75%;
+}
+.navbar .container .navbar-nav li a{
+    color: #6b7881;
+    text-shadow: none;
+
+}
+
+.upload_media #upload_media button {
+    cursor: pointer;
+    margin-bottom: 10px;
+    padding: 0 22px;
+    line-height: 42px;
+    border-radius: 5px;
+    background: #e74c3c;
+    color: #fff;
+    font-weight: 700;
+    font-size: 16px;
+    text-transform: uppercase;
+    -webkit-transition: all 300ms ease-in-out 0s;
+    transition: all 300ms ease-in-out 0s;
+}
+
+.upload_media:before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    content: '';
+    background: url(../../vendors/images/coco-thumbnail.png) no-repeat scroll center top;
+    background-position: center;
+    opacity: 0.2;
+    z-index: -1;
+  }
+/* navbar dark theme */
+
+.upload_media h3 {
+    font-size: 24px;
+    line-height: 1;
+    font-weight: lighter;
+    color: #fff;
+    margin-bottom: 6px;
+}

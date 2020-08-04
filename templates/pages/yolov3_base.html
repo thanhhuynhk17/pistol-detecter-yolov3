@@ -1,0 +1,101 @@
+{% extends "master.html" %}
+
+{% block title %}
+    {{title}}
+{% endblock%}
+
+{% block content %}
+
+    <!--Upload Form-->
+    <section class="row upload_media">
+        <div class="container">
+            <div class="row">
+                <h2 class="text-uppercase">80 objects can be detected - Base on COCO dataset</h2>
+                <h3>Upload an image to detect</h3>
+                
+                <form enctype="multipart/form-data" id="upload_media">
+                    <div class="inner row m0">
+                        <div class="row m0 plus_ico" onclick="select_img('input_btn');">+</div>
+                        <input type="file" name="image" id="input_btn" class="sr-only">
+                        <button class="btn" id="submit_btn">Upload</button>
+                        <p id="file_name"></p>
+                        <a id="jump_to_result" href="#detection_result" hidden ></a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section> <!--Upload Form-->
+
+    <!--Ribbon-->
+    <section class="row">
+        <ul id="detection_result" class="nav nav-justified ribbon">
+            <li><a href="#"></a></li>
+            <li><a href="#"></a></li>
+            <li><a href="#"></a></li>
+            <li><a href="#"></a></li>
+            <li><a href="#"></a></li>
+            <li><a href="#"></a></li>
+        </ul>
+    </section> <!--Ribbon-->
+
+    <!--Recent Upload-->
+    <section class="row recent_uploads">
+        <div class="container">
+            <div class="row title_row">
+                <h3 >Detection result</h3>
+            </div>
+            <div class="row media-grid content_video_posts">
+                <article class="col-sm-6 video_post postType4">
+                    <div id="origin_img" class=" row m0">
+                    </div>
+                </article>
+                <article class="col-sm-6 video_post postType4">
+                    <div id="predict_img" class=" row m0">
+                    </div>
+                </article>
+        
+            </div>
+        </div>
+    </section> <!--Recent Upload-->
+
+    <!--Ribbon-->
+    <section class="row">
+        <ul class="nav nav-justified ribbon">
+            <li><a href="#"></a></li>
+            <li><a href="#"></a></li>
+            <li><a href="#"></a></li>
+            <li><a href="#"></a></li>
+            <li><a href="#"></a></li>
+            <li><a href="#"></a></li>
+        </ul>
+    </section> <!--Ribbon-->
+    
+{% endblock%}
+
+{% block custom_js %}
+    <script src="{{ url_for('static', filename='custom/js/upload_helper_func.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            data = {
+                form_id: 'upload_media',
+                submit_id: 'submit_btn',
+                input_id: 'input_btn',
+                route: '/_upload-image/',
+                is_custom: 0
+            };
+            
+            $(`#${data.form_id}`).on('submit', function(event) {
+                // prevent page reload when form was submitted
+                event.preventDefault();
+                erase_result('origin_img', 'predict_img');
+
+                send_img(data);
+                $('#jump_to_result').click();
+            });
+
+        });
+
+    </script>
+
+
+{% endblock%}

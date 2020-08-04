@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{% endblock %}</title>
+    
+    <!--Favicons-->
+    <link rel="apple-touch-icon" sizes="57x57" href="{{ url_for('static', filename='/vendors/favicon/apple-icon-57x57.png') }}">
+    <link rel="apple-touch-icon" sizes="60x60" href="{{ url_for('static', filename='/vendors/favicon/apple-icon-60x60.png') }}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{{ url_for('static', filename='/vendors/favicon/apple-icon-72x72.png') }}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{{ url_for('static', filename='/vendors/favicon/apple-icon-76x76.png') }}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{{ url_for('static', filename='/vendors/favicon/apple-icon-114x114.png') }}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{{ url_for('static', filename='/vendors/favicon/apple-icon-120x120.png') }}">
+    <link rel="apple-touch-icon" sizes="144x144" href="{{ url_for('static', filename='/vendors/favicon/apple-icon-144x144.png') }}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{{ url_for('static', filename='/vendors/favicon/apple-icon-152x152.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='/vendors/favicon/apple-icon-180x180.png') }}">
+    <link rel="icon" type="image/png" sizes="192x192"  href="{{ url_for('static', filename='/vendors/favicon/android-icon-192x192.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='/vendors/favicon/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="96x96" href="{{ url_for('static', filename='/vendors/favicon/favicon-96x96.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='/vendors/favicon/favicon-16x16.png') }}">
+    <link rel="manifest" href="{{ url_for('static', filename='/vendors/favicon/manifest.json') }}">
+    <meta name="msapplication-TileColor" content="#e74c3c">
+    <meta name="msapplication-TileImage" content="{{ url_for('static', filename='/vendors/favicon/ms-icon-144x144.png') }}">
+    <meta name="theme-color" content="#e74c3c">
+    
+    <!--Bootstrap and Other Vendors-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='/vendors/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/vendors/css/bootstrap-theme.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/vendors/css/magnific-popup.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='') }}/vendors/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/vendors/bootstrap-select/css/bootstrap-select.min.css') }}" media="screen">
+    
+    <!--Fonts-->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+    
+    <!--Theme Styles-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='/vendors/css/default/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/vendors/css/responsive/responsive.css') }}">
+
+    <!--Custom Styles-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='custom/css/custom-css.css')}}">
+    
+    {% block custom_css%}
+    {% endblock %}
+    
+    <!--[if lt IE 9]>
+        <script src="js/html5shiv.min.js"></script>
+        <script src="js/respond.min.js"></script>
+    <![endif]-->
+    
+</head>
+
+<body class="home">
+    <!--Navigation-->
+    {% include "navbar.html"%}
+
+    <!--Page content-->
+    {% block content %}
+    {% endblock %}
+
+    <!--Footer-->
+    {% include "footer.html" %}
+
+	<!-- Preloader -->
+    {% include "preloader.html" %}
+
+    <!--jQuery, Bootstrap and other vendor JS-->
+    <!--jQuery-->
+    <script src="{{ url_for('static', filename='vendors/js/jquery-2.1.4.min.js') }}"></script>
+    
+    <!--Bootstrap JS-->
+    <script src="{{ url_for('static', filename='vendors/js/bootstrap.min.js') }}"></script>
+    
+    <!--jScroll-->
+    <script src="{{ url_for('static', filename='vendors/js/jquery.jscroll.min.js') }}"></script>
+    
+    <!--Magnific Popup-->
+    <script src="{{ url_for('static', filename='vendors/js/jquery.magnific-popup.min.js') }}"></script>
+    
+    <!--Bootstrap Select-->
+    <script src="{{ url_for('static', filename='vendors/bootstrap-select/js/bootstrap-select.min.js') }}"></script>
+    
+    <!--Theme JS-->
+    <script src="{{ url_for('static', filename='vendors/js/theme.js') }}"></script>
+
+    <!--Custom JS-->
+    {% block custom_js%}
+    {% endblock %}
+
+</body>
+
+</html>
