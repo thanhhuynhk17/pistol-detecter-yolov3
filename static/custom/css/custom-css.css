@@ -6,6 +6,7 @@
 
 .navbar .container .navbar-header .navbar-brand img{
     width: 75%;
+    margin: auto;
 }
 .navbar .container .navbar-nav li a{
     color: #6b7881;
@@ -35,8 +36,9 @@
     height: 100%;
     width: 100%;
     content: '';
-    background: url(../../vendors/images/coco-thumbnail.png) no-repeat scroll center top;
+    background: url(../../vendors/images/computer_vision.jpeg) no-repeat scroll center top;
     background-position: center;
+    background-size: cover;
     opacity: 0.2;
     z-index: -1;
   }

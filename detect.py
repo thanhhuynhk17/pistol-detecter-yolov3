@@ -20,8 +20,8 @@ import json
 from PIL import Image
 
 # construct the argument parse and parse the arguments
-confthres = 0.3
-nmsthres = 0.1
+confthres = 0.5
+nmsthres = 0.8
 yolo_path = './'
 
 def get_labels(labels_path):

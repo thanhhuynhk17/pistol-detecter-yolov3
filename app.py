@@ -1,5 +1,6 @@
-# import detect.py file
 from helper_func import Yolov3_model
+from helper_func import byteimg_to_cv2img
+from helper_func import cv2img_to_strimg
 
 from flask import Flask, redirect, url_for, render_template, jsonify, request, make_response, Response
 from werkzeug.utils import secure_filename
@@ -10,8 +11,8 @@ import os
 
 #import binascii
 import base64
-import io
 import json
+from PIL import Image
 
 app = Flask(__name__)
 
@@ -26,7 +27,7 @@ baseYolov3.loadModel()
 customYolov3 = Yolov3_model(labelsPath="static/yolov3_custom/obj.names",
                           wpath = "static/yolov3_custom/yolov3-custom_final.weights",
                           cfgpath = "static/yolov3_custom/yolov3-custom-test.cfg")
-# load model and store in baseYolov3.nets
+# load model and store in customYolov3.nets
 customYolov3.loadModel()
 
 # Home route
@@ -35,7 +36,7 @@ def index():
     return render_template("pages/index.html", title="Home page")
 
 # Yolov3 base route
-@app.route('/yolov3', methods=['GET'])
+@app.route('/yolov3/', methods=['GET'])
 def yolov3():
     return render_template("pages/yolov3_base.html", title="Yolov3 base")
 
@@ -46,31 +47,47 @@ UPLOAD_PATH = 'static/uploads/'
 def upload_image():
     is_custom = int(request.form['is_custom'])
     # GET REQUEST IMAGE & STORE ORIGIN IMAGE TO SERVER
-    file = request.files['image']
-    file_name = ''
-    if file:
-        file_name = secure_filename(file.filename)
-        file.save(os.path.join(UPLOAD_PATH + file_name))
-    else:
-        return  make_response(jsonify(msg='Upload error: image not found!!!'),400)
-    origin_url = os.path.join(UPLOAD_PATH + file_name)
+    if request.files:
+        byteimg = request.files['image'].read() # bytes image
+        cv2img = byteimg_to_cv2img(byteimg)
+        origin_img = cv2img_to_strimg(cv2img)
+        ###############
+        
+
+        predict_img=''
+        confidences =[]
+        classes = []
+        # USING CUSTOM YOLOv3 
+        # FROM MY CUSTOM DATASET TO PREDICT
+        if is_custom:
+            predict_img, confidences, classes= customYolov3.predictObj(cv2img=cv2img)
+        # USING BASE YOLOv3 WITH 80 CLASSES 
+        # FROM COCO DATASET TO PREDICT
+        else:
+            predict_img, confidences, classes= baseYolov3.predictObj(cv2img=cv2img)
+
+        # Respone data
+        predict_data = list(zip(classes,confidences))
+        response = {'status': 1,'origin_img': origin_img, 'predict_img': predict_img, 'predict_data': predict_data}
+        
+        return Response(json.dumps(response), mimetype='application/json')
+    else:   # upload file error
+        return jsonify({'status': 0, 'msg': 'Upload error!'})
+
+
+
+
+
+
+
+
+
+
 
 
     # USING CUSTOM YOLOv3 
     # FROM MY CUSTOM DATASET TO PREDICT
-    predict_url = ''
-    confidence = []
-    classes = []
-    if is_custom:
-        predict_url, confidences, classes = customYolov3.predictObj(origin_url=origin_url,
-                                                                   file_name=file_name,
-                                                                   UPLOAD_PATH=UPLOAD_PATH)
-    # USING BASE YOLOv3 WITH 80 CLASSES 
-    # FROM COCO DATASET TO PREDICT
-    else:
-        predict_url, confidences, classes= baseYolov3.predictObj(origin_url=origin_url,
-                                                                   file_name=file_name,
-                                                                   UPLOAD_PATH=UPLOAD_PATH)
+
         
     # Respone data
     predict_data = list(zip(classes,confidences))

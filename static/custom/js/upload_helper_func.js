@@ -15,6 +15,7 @@ function send_img(data) {
     form_data.append('is_custom', data.is_custom)
     $.when(ajax_request(data.route, form_data))
         .then( data =>{
+            console.log(data);
             show_result('origin_img', 'predict_img', data);
         });
 }
@@ -30,6 +31,9 @@ function ajax_request(url, form_data) {
     });
 }
 
+
+
+
 function show_result(origin_id, predict_id, data) {
     // Get origin div & predict div
     origin_div = $(`#${origin_id}`);
@@ -38,8 +42,10 @@ function show_result(origin_id, predict_id, data) {
     origin_title = `<h3>Origin image</h3>`;
     predict_title = `<h3>Predict image</h3>`;
     // Create image elements
-    origin_img = `<img style="width: 100%;" src="${data.origin_url}" alt="">`;
-    predict_img = `<img style="width: 100%;" src="${data.predict_url}" alt="">`;
+    data.origin_img = data.origin_img.split('\'')[1]
+    data.predict_img = data.predict_img.split('\'')[1]
+    origin_img = `<img style="width: 100%;" src="data:image/jpeg;base64,${data.origin_img}" alt="">`;
+    predict_img = `<img style="width: 100%;" src="data:image/jpeg;base64,${data.predict_img}" alt="">`;
     // Create list object
     list_item = ``;
     data.predict_data.forEach( element =>{
