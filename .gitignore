@@ -1,2 +1,3 @@
 static/yolov3/yolov3.weights
 static/yolov3_custom/yolov3-custom_final.weights
+__pycache__/
