@@ -4,11 +4,12 @@
 > Model was trained on Google Colab
 
 > Dataset: 3000 pistol images
+> [Raw dataset](http://www.mediafire.com/file/pvfircmboaelkxc/Gun_data_labeled.zip/file)
 
 ## Table of Contents
 
-- [Installing & Running App Locally](#localsetup)
-- [Deploying on Heroku](#deploytoheroku)
+- [Installing & Running App Locally](#installing--running-app-locally)
+- [Deploying on Heroku](#deploying-on-heroku)
 
 ## Installing & Running App Locally
 
