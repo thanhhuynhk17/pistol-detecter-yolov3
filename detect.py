@@ -21,7 +21,7 @@ from PIL import Image
 
 # construct the argument parse and parse the arguments
 confthres = 0.5
-nmsthres = 0.8
+nmsthres = 0.5
 yolo_path = './'
 
 def get_labels(labels_path):
